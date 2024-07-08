@@ -4,10 +4,8 @@ const creds = {
 }
 
 export function login(
-  email: string,
-  password: string
+   email: string, password: string
 ): { email: string; password: string; loggedInAt: string } | void {
-  console.log(email, ' : ', password)
   if (email === creds.email && password === creds.password) {
     return {
       ...creds,

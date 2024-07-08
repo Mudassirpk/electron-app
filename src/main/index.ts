@@ -4,6 +4,7 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { get_hostname } from './lib/os_check'
 import { login } from './lib/login'
+import { services } from './services/services'
 
 function createWindow(): void {
   // Create the browser window.
@@ -11,6 +12,8 @@ function createWindow(): void {
     width: 900,
     height: 670,
     show: false,
+    frame: true,
+    center: true,
     title: 'MS-EAPP',
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
@@ -55,8 +58,9 @@ app.whenReady().then(() => {
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
 
-  ipcMain.handle('get_hostname', (_, ...args) => get_hostname())
-  ipcMain.handle('login', (_, email: string, password: string) => login(email, password))
+  services.forEach((service) => {
+    ipcMain.handle(service.title, service.service)
+  })
 
   createWindow()
 

@@ -1,9 +1,11 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useContext, useState } from 'react'
 import './login.css'
 import { useNavigate } from 'react-router-dom'
+import { authContext } from '@renderer/context/auth'
 
 function index(): React.ReactNode {
   const navigate = useNavigate()
+  const auth_context = useContext(authContext)
 
   const [loginData, setLoginData] = useState({
     email: '',
@@ -12,11 +14,10 @@ function index(): React.ReactNode {
 
   async function handleSubmit(e: FormEvent): Promise<void> {
     e.preventDefault()
-    console.log('context: ', window.context)
     const resposne = await window.context.login(loginData.email, loginData.password)
 
-    console.log('res: ', resposne)
     if (resposne) {
+      auth_context?.setUser(resposne)
       navigate('/')
     }
   }
