@@ -2,8 +2,6 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import { get_hostname } from './lib/os_check'
-import { login } from './lib/login'
 import { services } from './services/services'
 
 function createWindow(): void {
@@ -58,6 +56,7 @@ app.whenReady().then(() => {
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
 
+  // services are initializated here
   services.forEach((service) => {
     ipcMain.handle(service.title, service.service)
   })

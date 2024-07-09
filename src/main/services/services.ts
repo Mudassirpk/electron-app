@@ -1,6 +1,7 @@
 import { login } from '../lib/login'
 import { add_user } from './User/user_crud'
 
+// contains all the services used in the backend of the application
 export const services = [
   {
     title: 'login',
