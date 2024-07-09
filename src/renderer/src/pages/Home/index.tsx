@@ -11,14 +11,16 @@ function index(): React.ReactNode {
   }, [])
 
   return (
-    <div>
+    <main>
       Home
-      {auth_context?.user ? `logged in at: ${auth_context?.user.loggedInAt}` : null}
+      {auth_context?.user
+        ? `Name: ${auth_context.user.name} Email: ${auth_context.user.email}`
+        : null}
       <Link to={'sales'}>Sales</Link>
       <Link to={'/login'}>Login</Link>
       <Link to={'/signup'}>Signup</Link>
       <Outlet />
-    </div>
+    </main>
   )
 }
 
