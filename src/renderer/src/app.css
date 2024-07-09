@@ -10,3 +10,8 @@ main {
   height: 100vh;
   color: black;
 }
+
+.error {
+  color: red;
+  font-weight: 600;
+}
