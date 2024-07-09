@@ -1,9 +1,10 @@
 import React, { SetStateAction, useState } from 'react'
 
 export type TUser = {
+  name: string
   email: string
-  password: string
-  loggedInAt: string
+  password?: string
+  created_at: string
 }
 
 type TAuthContext = {
