@@ -7,6 +7,8 @@ function index(): React.ReactNode {
   const navigate = useNavigate()
   const auth_context = useContext(authContext)
 
+  const [error, setError] = useState<null | string>(null)
+
   const [loginData, setLoginData] = useState({
     email: '',
     password: ''
@@ -14,10 +16,12 @@ function index(): React.ReactNode {
 
   async function handleSubmit(e: FormEvent): Promise<void> {
     e.preventDefault()
-    const resposne = await window.context.login(loginData.email, loginData.password)
-
-    if (resposne) {
-      auth_context?.setUser(resposne)
+    const response = await window.context.login(loginData.email, loginData.password)
+    if (response.error) {
+      setError(response.error.message)
+    } else {
+      auth_context?.setUser(response)
+      setError(null)
       navigate('/')
     }
   }
@@ -39,6 +43,7 @@ function index(): React.ReactNode {
         type="password"
         placeholder="password"
       />
+      {error ? <p className="error">{error}</p> : null}
       <button type="submit">Login</button>
       <Link to={'/signup'}>Sign up</Link>
     </form>
