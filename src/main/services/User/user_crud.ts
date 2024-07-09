@@ -1,11 +1,12 @@
-import { db_client } from '../db_connection'
+import { TUser } from '../../../types'
+import db_client from '../db_connection'
 
-export async function get_user(): Promise<void | object> {
+export async function get_user(email: string): Promise<void | TUser> {
   try {
-    await db_client.connect()
-    const users = await db_client.query('SELECT * FROM users')
-    console.log(users)
-    if (users) return users
+    const users = await db_client.query('SELECT * FROM users WHERE email = $1', [email])
+    if (users.rows.length > 0) {
+      return users.rows[0]
+    }
   } catch (error) {
     console.log('error while getting user: ', error)
   }
@@ -19,16 +20,16 @@ export async function add_user({
   name: string
   email: string
   password: string
-}) {
+}): Promise<boolean | void> {
   try {
-    await db_client.connect()
     const res = await db_client.query('INSERT INTO users(name,email,password) VALUES($1,$2,$3)', [
       name,
       email,
       password
     ])
-
-    console.log('res: ', res)
+    if (res) {
+      return true
+    }
   } catch (error) {
     console.log('Error while creating user: ', error)
   }
