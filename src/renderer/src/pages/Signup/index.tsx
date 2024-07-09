@@ -1,5 +1,8 @@
 import { FormEvent, useState } from 'react'
 
+import './signup.css'
+import { Link } from 'react-router-dom'
+
 export default function Signup(): React.ReactNode {
   const [user, setUser] = useState({ name: '', email: '', password: '' })
   async function signup(e: FormEvent): Promise<void> {
@@ -8,7 +11,7 @@ export default function Signup(): React.ReactNode {
     console.log('signup res: ', res)
   }
   return (
-    <form onSubmit={signup}>
+    <form className="signup" onSubmit={signup}>
       <input
         value={user.name}
         onChange={(e) => setUser({ ...user, name: e.target.value })}
@@ -21,16 +24,17 @@ export default function Signup(): React.ReactNode {
         onChange={(e) => setUser({ ...user, email: e.target.value })}
         required
         type="email"
-        placeholder="name"
+        placeholder="email"
       />
       <input
         value={user.password}
         required
         onChange={(e) => setUser({ ...user, password: e.target.value })}
         type="password"
-        placeholder="name"
+        placeholder="********"
       />
       <button type="submit">Signup</button>
+      <Link to={'/login'}>Login</Link>
     </form>
   )
 }
