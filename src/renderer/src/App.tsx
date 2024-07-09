@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Sales from './pages/Home/Sales'
 import Login from './pages/Login'
 import AuthProvider from './context/auth'
+import Signup from './pages/Signup'
 
 function App(): JSX.Element {
   const router = createBrowserRouter([
@@ -18,6 +19,10 @@ function App(): JSX.Element {
           errorElement: <p>Opps</p>
         }
       ]
+    },
+    {
+      path: '/signup',
+      element: <Signup />
     },
     {
       path: '/login',

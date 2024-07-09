@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useState } from 'react'
 import './login.css'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { authContext } from '@renderer/context/auth'
 
 function index(): React.ReactNode {
@@ -40,6 +40,7 @@ function index(): React.ReactNode {
         placeholder="password"
       />
       <button type="submit">Login</button>
+      <Link to={'/signup'}>Sign up</Link>
     </form>
   )
 }

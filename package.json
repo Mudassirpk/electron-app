@@ -23,7 +23,9 @@
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^3.0.0",
+    "@types/pg": "^8.11.6",
     "electron-updater": "^6.1.7",
+    "pg": "^8.12.0",
     "react-router-dom": "^6.24.1"
   },
   "devDependencies": {
