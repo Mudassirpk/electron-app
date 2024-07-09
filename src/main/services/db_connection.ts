@@ -1,10 +1,9 @@
 import { Client } from 'pg'
 
-export const db_client = new Client({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'pos',
-  password: 'mskhan',
-  port: 5432,
-  hostname: 'postgres'
+const db_client = new Client({
+  connectionString: 'postgres://mskhan:mskhan@localhost:5432/pos'
 })
+
+db_client.connect()
+
+export default db_client
